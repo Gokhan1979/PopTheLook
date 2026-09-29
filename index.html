@@ -126,9 +126,52 @@ nav{display:flex;justify-content:space-between;padding:14px 20px;background:#fff
 <script>
 function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='auth')showAuth('signin');window.scrollTo(0,0)}
 function showAuth(id){document.querySelectorAll('.auth-sub').forEach(a=>a.classList.remove('active'));document.getElementById('auth-'+id).classList.add('active');}
-function doLogin(){let e=document.getElementById('lEmail').value,p=document.getElementById('lPass').value;if(!e||!p){document.getElementById('lMsg').innerText='Enter email & password';return}document.getElementById('lMsg').innerText='✓ Signed in as '+e;localStorage.setItem('user',e);setTimeout(()=>showPage('shop'),800)}
-function doRegister(){let e=document.getElementById('rEmail').value||'test@email.com';if(!e){return}document.getElementById('cEmail').innerText=e;document.getElementById('rMsg').innerText='Account created!';setTimeout(()=>showAuth('confirm'),600)}
-function doForgot(){let e=document.getElementById('fEmail').value;if(!e){document.getElementById('fMsg').innerText='Enter email';return}document.getElementById('fMsg').innerText='✓ Reset link sent to '+e;setTimeout(()=>{document.getElementById('forgot-step1').style.display='none';document.getElementById('forgot-step2').style.display='block'},1000)}
+
+function getUsers(){return JSON.parse(localStorage.getItem('ptl_users')||'[]')}
+function saveUsers(u){localStorage.setItem('ptl_users',JSON.stringify(u))}
+
+function doLogin(){
+  let e=document.getElementById('lEmail').value.trim().toLowerCase();
+  let p=document.getElementById('lPass').value;
+  if(!e||!p){document.getElementById('lMsg').innerText='Enter email & password';document.getElementById('lMsg').style.color='red';return}
+  let users=getUsers();
+  let found=users.find(u=>u.email===e && u.pass===p);
+  if(!found){
+    document.getElementById('lMsg').innerText='❌ Wrong email or password! Register first.';
+    document.getElementById('lMsg').style.color='red';
+    return
+  }
+  document.getElementById('lMsg').style.color='green';
+  document.getElementById('lMsg').innerText='✓ Signed in as '+e;
+  localStorage.setItem('user',e);
+  setTimeout(()=>showPage('shop'),800)
+}
+
+function doRegister(){
+  let e=document.getElementById('rEmail').value.trim().toLowerCase();
+  let p=document.getElementById('rPass').value;
+  let c=document.getElementById('rConfirm').value;
+  if(!e||!p){document.getElementById('rMsg').style.color='red';document.getElementById('rMsg').innerText='Enter email & password';return}
+  if(p!==c){document.getElementById('rMsg').style.color='red';document.getElementById('rMsg').innerText='❌ Passwords do not match!';return}
+  let users=getUsers();
+  if(users.find(u=>u.email===e)){document.getElementById('rMsg').style.color='red';document.getElementById('rMsg').innerText='❌ Email already registered! Sign in.';return}
+  users.push({email:e,pass:p});
+  saveUsers(users);
+  document.getElementById('cEmail').innerText=e;
+  document.getElementById('rMsg').style.color='green';
+  document.getElementById('rMsg').innerText='✓ Account created!';
+  setTimeout(()=>showAuth('confirm'),600)
+}
+
+function doForgot(){
+  let e=document.getElementById('fEmail').value.trim().toLowerCase();
+  if(!e){document.getElementById('fMsg').style.color='red';document.getElementById('fMsg').innerText='Enter email';return}
+  let users=getUsers();
+  if(!users.find(u=>u.email===e)){document.getElementById('fMsg').style.color='red';document.getElementById('fMsg').innerText='❌ Email not found! Register first.';return}
+  document.getElementById('fMsg').style.color='green';
+  document.getElementById('fMsg').innerText='✓ Reset link sent to '+e+' (demo - no real email)';
+  setTimeout(()=>{document.getElementById('forgot-step1').style.display='none';document.getElementById('forgot-step2').style.display='block'},1000)
+}
 function saveProfile(){let n=document.getElementById('pName').value||'User';alert('Profile saved! Welcome '+n);showPage('shop')}
 </script>
 </body>
