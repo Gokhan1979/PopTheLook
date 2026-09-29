@@ -13,7 +13,15 @@ function openProduct(id){currentProd=products.find(p=>p.id===id);selColorObj=cur
 function updateProductUI(){document.getElementById('pMain').src=selColorObj.imgs[0];document.getElementById('pName').innerText=currentProd.name;document.getElementById('pPrice').innerText='£'+currentProd.price;document.getElementById('pPriceBtn').innerText='£'+currentProd.price;document.getElementById('pCat').innerText=currentProd.cat;document.getElementById('selColorText').innerText=selColorObj.name;document.getElementById('selSizeText').innerText=selSize;document.getElementById('selectedSummary').innerText=selColorObj.name+', Size '+selSize;let th='';selColorObj.imgs.forEach((im,i)=>{th+=`<img src="${im}" class="thumb ${i===0?'active':''}" onclick="setMain('${im}',this)">`});document.getElementById('thumbs').innerHTML=th;let cd='';currentProd.colors.forEach(c=>{cd+=`<span class="color-dot ${c.name===selColorObj.name?'active':''}" style="background:${c.hex}" title="${c.name}" onclick="selectColor('${c.name}')"></span>`});document.getElementById('colorDots').innerHTML=cd;let sb='';currentProd.sizes.forEach(s=>{sb+=`<span class="size-box ${s===selSize?'active':''}" onclick="selectSize('${s}')">${s}</span>`});document.getElementById('sizeBoxes').innerHTML=sb}
 function setMain(src,el){document.getElementById('pMain').src=src;document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
 function selectColor(name){selColorObj=currentProd.colors.find(c=>c.name===name);updateProductUI()}
-function selectSize(s){selSize=s;document.getElementById('selSizeText').innerText=s;document.getElementById('selectedSummary').innerText=selColorObj.name+', Size '+s;document.querySelectorAll('#sizeBoxes.size-box').forEach(b=>{b.classList.toggle('active',b.innerText===s)})}
+function selectSize(s){
+  selSize=s;
+  document.getElementById('selSizeText').innerText=s;
+  document.getElementById('selectedSummary').innerText=selColorObj.name+', Size '+s;
+  document.querySelectorAll('#sizeBoxes .size-box').forEach(b=>{
+    b.classList.remove('active');
+    if(b.innerText===s) b.classList.add('active');
+  });
+}
 function addToCart(){let item={id:currentProd.id,name:currentProd.name+` (${selColorObj.name}, ${selSize})`,price:currentProd.price,img:selColorObj.imgs[0]};cart.push(item);localStorage.setItem('ptl_cart',JSON.stringify(cart));updateCart();alert('Added: '+item.name)}
 function updateCart(){document.getElementById('cartCount').innerText=cart.length;let items=document.getElementById('cartItems');let empty=document.getElementById('cartEmpty');let totalDiv=document.getElementById('cartTotal');if(cart.length===0){items.innerHTML='';empty.style.display='block';totalDiv.style.display='none';return}empty.style.display='none';totalDiv.style.display='block';items.innerHTML='';let total=0;cart.forEach((p,i)=>{total+=p.price;items.innerHTML+=`<div class="cart-item"><img src="${p.img}" style="width:60px;height:80px;object-fit:cover"><div><p style="font-size:12px">${p.name}</p><b>£${p.price}</b><br><span style="font-size:10px;text-decoration:underline;cursor:pointer" onclick="removeCart(${i})">Remove</span></div></div>`});document.getElementById('totalPrice').innerText='£'+total}
 function removeCart(i){cart.splice(i,1);localStorage.setItem('ptl_cart',JSON.stringify(cart));updateCart()}
