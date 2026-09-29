@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POP THE LOOK | Luxury Women Clothing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',Helvetica,sans-serif;background:#fff;color:#111}
+.serif{font-family:'Cormorant Garamond',serif}
+nav{background:#000;color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+nav b{font-family:'Cormorant Garamond',serif;letter-spacing:4px;font-size:18px}
+nav a{color:#fff;text-decoration:none;margin-left:18px;font-size:13px;letter-spacing:1px}
+.hero{height:88vh;background:linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.25)),url('https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=1400') center/cover;display:flex;align-items:flex-end;padding:50px 30px}
+.hero-box{background:#fff;padding:35px;max-width:440px;box-shadow:0 10px 40px rgba(0,0,0,0.15)}
+.hero-box span{font-size:11px;letter-spacing:4px;color:#666}
+.hero-box h1{font-family:'Cormorant Garamond',serif;font-size:46px;line-height:1.05;margin:12px 0;font-weight:600}
+.btn{background:#000;color:#fff;padding:14px 30px;display:inline-block;margin-top:18px;text-decoration:none;font-size:12px;letter-spacing:2px;border:none;cursor:pointer}
+.section{padding:50px 24px;max-width:1280px;margin:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:28px;margin-top:25px}
+.card{border:1px solid #eee;transition:0.3s;background:#fff}.card:hover{box-shadow:0 8px 25px rgba(0,0,0,0.08)}
+.card img{width:100%;height:340px;object-fit:cover}
+.info{padding:16px}.info h3{font-family:'Cormorant Garamond',serif;font-size:18px;margin:4px 0}
+.info p{font-size:13px;color:#666;margin:4px 0}
+.price{font-weight:600;margin:6px 0}
+.live{position:fixed;bottom:15px;right:15px;background:#000;color:#fff;padding:10px 16px;font-size:11px;letter-spacing:1px;z-index:999}
+</style>
+</head>
+<body>
+
+<div class="live">● LIVE - NEW PROJECT</div>
+
+<nav>
+<b>POP THE LOOK</b>
+<div>
+<a href="#shop">SHOP</a>
+<a href="#new">NEW IN</a>
+<a href="frontend/src/pages/Login/Login.jsx">SIGN IN</a>
+<a href="frontend/src/pages/Register/Register.jsx">ACCOUNT</a>
+<a href="#cart">CART (0)</a>
+</div>
+</nav>
+
+<div class="hero">
+<div class="hero-box">
+<span>NEW COLLECTION 2026</span>
+<h1 class="serif">Summer Blooms<br>Collection</h1>
+<p style="color:#555;margin-top:8px;line-height:1.6">Sheer floral mesh. Effortless elegance. Your new popthelook website is now LIVE!</p>
+<a href="#shop" class="btn">SHOP NOW →</a>
+</div>
+</div>
+
+<div class="section" id="shop">
+<h2 class="serif" style="font-size:32px">Shop Collection</h2>
+<p style="color:#777;margin-top:6px">From your frontend/src/pages/Shop/ - 100+ files connected</p>
+
+<div class="grid">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600">
+<div class="info">
+<p>NEW</p>
+<h3>Floral Mesh Top - Olive</h3>
+<p>Sheer embroidered mesh</p>
+<div class="price">£138</div>
+<p>⭐ 4.8 (32) | Free shipping £100+</p>
+<button class="btn" style="width:100%;margin-top:10px">ADD TO CART</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?w=600">
+<div class="info">
+<p>BESTSELLER</p>
+<h3>Floral Mesh Top - Rose</h3>
+<p>Sheer embroidered mesh</p>
+<div class="price">£138</div>
+<p>⭐ 4.9 (56) | Complimentary Returns</p>
+<button class="btn" style="width:100%;margin-top:10px">ADD TO CART</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600">
+<div class="info">
+<p>ESSENTIAL</p>
+<h3>Linen Blouse Cream</h3>
+<p>100% organic linen</p>
+<div class="price">£89</div>
+<p>⭐ 4.6 (18)</p>
+<button class="btn" style="width:100%;margin-top:10px">ADD TO CART</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600">
+<div class="info">
+<p>EDITOR'S PICK</p>
+<h3>Embroidered Puff Dress</h3>
+<p>Floral puff sleeve dress</p>
+<div class="price">£128</div>
+<p>⭐ 4.9 (41)</p>
+<button class="btn" style="width:100%;margin-top:10px">ADD TO CART</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section" style="background:#f8f8f8;text-align:center;margin-top:20px">
+<h2 class="serif" style="font-size:28px">Your New Project Structure is Ready</h2>
+<div style="display:flex;justify-content:center;gap:40px;margin-top:25px;flex-wrap:wrap">
+<div><b>frontend/</b><br>React pages live</div>
+<div><b>backend/</b><br>API ready</div>
+<div><b>admin/</b><br>Dashboard ready</div>
+</div>
+<p style="margin-top:20px;color:#666">Next: I will connect your real Login, Cart, Checkout from frontend/src/</p>
+</div>
+
+<footer style="background:#000;color:#fff;text-align:center;padding:30px 20px;margin-top:30px">
+<p style="font-family:'Cormorant Garamond',serif;letter-spacing:4px;font-size:16px">POP THE
