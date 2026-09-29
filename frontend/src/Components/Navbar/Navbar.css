@@ -1,0 +1,9 @@
+nav {
+  font-family: 'Helvetica', sans-serif;
+}
+nav a:hover {
+  opacity: 0.7;
+}
+@media (max-width: 768px){
+  nav { flex-direction: column; gap: 10px; }
+}
