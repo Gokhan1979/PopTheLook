@@ -1,45 +1,37 @@
-import { useState, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../context/AuthContext.jsx'
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import './Login.css'
 
 export default function Login(){
-  const [email,setEmail]=useState('');
-  const [pass,setPass]=useState('');
-  const { login } = useContext(AuthContext);
-  const nav = useNavigate();
+  const [email,setEmail]=useState('')
+  const [pass,setPass]=useState('')
+  const navigate=useNavigate()
 
-  const handle = async(e)=>{
-    e.preventDefault();
-    try{
-      const res = await fetch('/api/users/login', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({email, password: pass})
-      });
-      const data = await res.json();
-      if(!res.ok) return alert(data.message);
-
-      login(data.user, data.token);
-
-      // If profile not completed -> open profile form immediately
-      if(data.needsProfile){
-        nav('/profile');
-      } else {
-        nav('/'); // Homepage
-      }
-    }catch(err){ alert('Login failed'); }
+  const login=(e)=>{
+    e.preventDefault()
+    if(email && pass){
+      localStorage.setItem('user', email)
+      navigate('/')
+    }
   }
 
-  return <div style={{maxWidth:400, margin:'80px auto', padding:20, border:'1px solid #eee'}}>
-    <h1 style={{fontFamily:'serif'}}>Welcome back</h1>
-    <form onSubmit={handle}>
-      <input type="email" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required style={{width:'100%', padding:14, marginBottom:10}}/>
-      <input type="password" placeholder="Password" value={pass} onChange={e=>setPass(e.target.value)} required style={{width:'100%', padding:14, marginBottom:20}}/>
-      <button style={{width:'100%', background:'black', color:'white', padding:14}}>SIGN IN</button>
-    </form>
-    <div style={{marginTop:15, textAlign:'center'}}>
-      <Link to="/forgot" style={{color:'black'}}>Forgot your password?</Link><br/><br/>
-      <span>Don't have account? </span><Link to="/register" style={{color:'black', fontWeight:'bold'}}>Create account</Link>
+  return(
+    <div style={{maxWidth:'400px',margin:'80px auto',padding:'20px',textAlign:'center'}}>
+      <h1 style={{fontFamily:'serif',letterSpacing:'4px'}}>SIGN IN</h1>
+      <p style={{fontSize:'11px',color:'#999',marginTop:'10px',letterSpacing:'1px'}}>Welcome back to POP THE LOOK</p>
+
+      <form onSubmit={login} style={{marginTop:'30px',textAlign:'left'}}>
+        <label style={{fontSize:'10px',letterSpacing:'1px'}}>EMAIL</label>
+        <input value={email} onChange={e=>setEmail(e.target.value)} type="email" required style={{width:'100%',padding:'12px',border:'1px solid #ddd',margin:'8px 0 20px',outline:'none'}} placeholder="you@email.com"/>
+
+        <label style={{fontSize:'10px',letterSpacing:'1px'}}>PASSWORD</label>
+        <input value={pass} onChange={e=>setPass(e.target.value)} type="password" required style={{width:'100%',padding:'12px',border:'1px solid #ddd',margin:'8px 0 20px',outline:'none'}} placeholder="••••••••"/>
+
+        <button type="submit" style={{background:'black',color:'white',width:'100%',padding:'14px',border:'none',letterSpacing:'2px',cursor:'pointer',marginTop:'10px'}}>SIGN IN</button>
+      </form>
+
+      <p style={{fontSize:'11px',marginTop:'20px'}}>Don't have account? <Link to="/register" style={{textDecoration:'underline',color:'#000'}}>Register</Link></p>
+      <p style={{fontSize:'10px',color:'#999',marginTop:'30px'}}>Demo: use any email/pass - SIGN OUT will appear in navbar after login</p>
     </div>
-  </div>
+  )
 }
