@@ -1,212 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>POP THE LOOK - Luxury</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POP THE LOOK</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#faf8f5;color:#111}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;background:#faf8f5}
 .serif{font-family:'Cormorant Garamond',serif}
-.topbar{background:#000;color:#fff;text-align:center;padding:12px;letter-spacing:3px;font-size:14px;font-family:'Cormorant Garamond',serif}
-nav{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:100}
-nav b{letter-spacing:4px;font-family:'Cormorant Garamond',serif}
-.page{display:none;min-height:80vh}.page.active{display:block}
+.topbar{background:#000;color:#fff;text-align:center;padding:11px;letter-spacing:4px;font-size:13px}
+nav{display:flex;justify-content:space-between;padding:14px 20px;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:10}
+.page{display:none}.page.active{display:block}
+.hero{height:90vh;background:linear-gradient(to top,rgba(0,0,0,.55),transparent),url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200') center/cover;display:flex;align-items:end;padding:28px;color:#fff}
+.btn-black{background:#000;color:#fff;padding:14px;border:none;width:100%;letter-spacing:1px;font-size:12px;cursor:pointer;margin-top:12px}
+.btn-white{background:#fff;color:#000;border:1px solid #000;padding:14px;width:100%;letter-spacing:1px;font-size:12px;cursor:pointer;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px} @media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr);max-width:1100px;margin:auto}}
+.card{background:#fff;cursor:pointer}.card img{width:100%;height:300px;object-fit:cover}.card div{padding:10px}
 
-/* HOME - matches your first screenshot left */
-.hero{height:92vh;background:linear-gradient(to top,rgba(0,0,0,0.5),rgba(0,0,0,0.1)),url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1400') center/cover;display:flex;align-items:flex-end;padding:30px}
-.hero-content{color:#fff;max-width:360px}
-.hero-content span{font-size:12px;letter-spacing:3px}
-.hero-content h1{font-family:'Cormorant Garamond',serif;font-size:42px;line-height:1.1;margin:10px 0 12px}
-.btn-black{background:#000;color:#fff;padding:13px 28px;border:none;letter-spacing:1px;font-size:12px;cursor:pointer;width:100%;margin-top:10px}
-.btn-white{background:#fff;color:#000;border:1px solid #000;padding:13px 28px;letter-spacing:1px;font-size:12px;cursor:pointer;width:100%;margin-top:10px}
-
-/* SHOP - matches middle screenshot */
-.shop-header{display:flex;justify-content:space-between;padding:18px 24px;align-items:center}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 14px 20px}
-@media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr);max-width:1200px;margin:auto}}
-.card{background:#fff}.card img{width:100%;height:320px;object-fit:cover}.card-info{padding:10px}.card-info p{font-size:12px;color:#666}.card-info h4{font-family:'Cormorant Garamond',serif;font-size:15px;margin:4px 0}
-
-/* PRODUCT - matches right screenshot */
-.product-wrap{display:grid;grid-template-columns:1fr;max-width:1100px;margin:auto}
-@media(min-width:800px){.product-wrap{grid-template-columns:1fr 1fr}}
-.product-wrap img{width:100%;height:500px;object-fit:cover}
-.p-details{padding:24px;background:#fff}
-.size-row{display:flex;gap:8px;margin:10px 0}.size-row button{padding:8px 14px;border:1px solid #ddd;background:#fff;cursor:pointer}.size-row button.active{background:#000;color:#fff}
-
-/* AUTH PAGES - matches your second screenshot - MARBLE BG */
-.auth-bg{background:url('https://images.unsplash.com/photo-1618220179428-22790b461013?w=1400') center/cover;min-height:100vh;padding:30px 16px}
-.auth-header{text-align:center;padding:20px 0 30px}.auth-header h1{font-family:'Cormorant Garamond',serif;letter-spacing:5px;font-size:22px}
-.auth-grid{display:grid;grid-template-columns:1fr;gap:20px;max-width:1300px;margin:auto}
-@media(min-width:1000px){.auth-grid{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:600px) and (max-width:999px){.auth-grid{grid-template-columns:repeat(2,1fr)}}
-.auth-card{background:#fff;padding:28px 24px;box-shadow:0 10px 40px rgba(0,0,0,0.08);border-radius:2px}
-.auth-card small{font-size:9px;letter-spacing:1px;color:#666;display:block;text-align:center;margin-bottom:12px}
-.auth-card h2{font-family:'Cormorant Garamond',serif;text-align:center;font-size:20px;margin-bottom:4px}
-.auth-card p.sub{text-align:center;font-size:11px;color:#666;margin-bottom:18px}
-.auth-card label{font-size:11px;display:block;margin:12px 0 4px}
-.auth-card input,.auth-card select{width:100%;padding:10px;border:1px solid #ddd;font-size:13px}
-.auth-card a.link{color:#000;font-size:11px;text-decoration:underline;display:block;text-align:center;margin:10px 0}
-.icon-circle{width:70px;height:70px;border:1px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;font-size:30px}
+/* AUTH - SEPARATE PAGES */
+.auth-bg{background:url('https://images.unsplash.com/photo-1618220179428-22790b461013?w=1200') center/cover;min-height:92vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.auth-card{background:#fff;padding:32px 28px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.auth-card small{font-size:9px;letter-spacing:1px;color:#999;display:block;text-align:center;margin-bottom:14px}
+.auth-card h2{font-family:'Cormorant Garamond',serif;text-align:center;font-size:24px}
+.auth-card p.sub{text-align:center;font-size:11px;color:#666;margin:6px 0 20px}
+.auth-card label{font-size:11px;display:block;margin:14px 0 4px}
+.auth-card input,.auth-card select{width:100%;padding:11px;border:1px solid #ddd}
+.link{text-align:center;font-size:11px;margin:12px 0;display:block;color:#000;text-decoration:underline;cursor:pointer}
+.icon-circle{width:64px;height:64px;border:1px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-.footer-links{display:flex;gap:10px;justify-content:center;margin:20px 0 40px;flex-wrap:wrap}
-.footer-links button{background:none;border:none;text-decoration:underline;font-size:12px;cursor:pointer;color:#111}
+.auth-sub{display:none}.auth-sub.active{display:block}
 </style>
 </head>
 <body>
-
 <div class="topbar">POP THE LOOK</div>
-<nav>
-<b style="cursor:pointer" onclick="showPage('home')">POP THE LOOK</b>
-<div style="display:flex;gap:16px;font-size:13px">
-<span style="cursor:pointer" onclick="showPage('shop')">Shop</span>
-<span style="cursor:pointer" onclick="showPage('auth')">Sign In</span>
-<span style="cursor:pointer" onclick="showPage('product')">Cart (<span id="cartCount">0</span>)</span>
-</div>
+<nav><b onclick="showPage('home')" style="letter-spacing:4px;cursor:pointer" class="serif">POP THE LOOK</b>
+<div style="display:flex;gap:14px;font-size:12px"><span onclick="showPage('shop')" style="cursor:pointer">Shop</span><span onclick="showPage('auth')" style="cursor:pointer">Sign In</span><span>Cart (0)</span></div>
 </nav>
 
-<!-- HOME PAGE -->
 <div id="home" class="page active">
-<div class="hero">
-<div class="hero-content">
-<span>NEW IN</span>
-<h1 class="serif">SUMMER BLOOMS COLLECTION</h1>
-<p style="font-size:13px;line-height:1.5;margin-bottom:14px">Sheer floral mesh. Effortless elegance for the season.</p>
-<button class="btn-black" onclick="showPage('shop')">SHOP NOW →</button>
-<div style="display:flex;gap:20px;margin-top:22px;font-size:10px">
-<span>🚚 FREE SHIPPING ON ORDERS £100+</span><span>↩ COMPLIMENTARY RETURNS</span><span>♻ SUSTAINABLY CRAFTED</span>
-</div>
-</div>
-</div>
+<div class="hero"><div style="max-width:340px"><p style="font-size:11px;letter-spacing:3px">NEW IN</p><h1 class="serif" style="font-size:40px;line-height:1;margin:10px 0">SUMMER BLOOMS COLLECTION</h1><button class="btn-black" onclick="showPage('shop')">SHOP NOW →</button></div></div>
 </div>
 
-<!-- SHOP PAGE -->
 <div id="shop" class="page">
-<div class="shop-header"><span>Home / Shop / <b>Tops & Dresses</b></span><span style="font-size:12px">Filters ▼ &nbsp; Sort: Recommended ▼ &nbsp; <b>24 Products</b></span></div>
+<div style="display:flex;justify-content:space-between;padding:16px;font-size:12px"><span>Home / Shop / <b>Tops</b></span><span><b>6 Products</b></span></div>
 <div class="grid">
-<div class="card" onclick="showPage('product')"><img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=600"><div class="card-info"><p>Linen Button Blouse</p><h4>£89</h4><p>★★★☆ (32)</p></div></div>
-<div class="card" onclick="showPage('product')"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600"><div class="card-info"><p>Ribbed Knit Tank Black</p><h4>£65</h4><p>★★★☆ (18)</p></div></div>
-<div class="card" onclick="showPage('product')"><img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?w=600"><div class="card-info"><p>Embroidered Puff Dress Cream £128</p><h4>£128</h4><p>★★★☆ (41)</p></div></div>
-<div class="card" onclick="showPage('product')"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600"><div class="card-info"><p>Silk Wrap Dress Navy</p><h4>£145</h4><p>4.5 ★★ (27)</p></div></div>
-<div class="card" onclick="showPage('product')"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600"><div class="card-info"><p>Crochet Knit Top Olive</p><h4>£78</h4><p>★★★☆ (14)</p></div></div>
-<div class="card" onclick="showPage('product')"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600"><div class="card-info"><p>Ruffled Cotton Shirt White</p><h4>£92</h4><p>★★★☆ (22)</p></div></div>
+<div class="card" onclick="showPage('product')"><img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"><div><p style="font-size:11px;color:#666">Linen Blouse</p><b class="serif">£89</b></div></div>
+<div class="card" onclick="showPage('product')"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=500"><div><p style="font-size:11px;color:#666">Rose Top</p><b class="serif">£138</b></div></div>
+<div class="card" onclick="showPage('product')"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"><div><p style="font-size:11px;color:#666">Wrap Dress</p><b class="serif">£145</b></div></div>
 </div>
 </div>
 
-<!-- PRODUCT DETAILS PAGE -->
 <div id="product" class="page">
-<div class="product-wrap">
-<img id="mainProdImg" src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800">
-<div class="p-details">
-<p style="font-size:12px">Home / Shop / Product Details</p>
-<h1 class="serif" style="font-size:26px;margin:14px 0">Floral Mesh Button Top — Rose</h1>
-<p>★★★★☆ 4.7 (56 reviews)</p>
-<h2 class="serif" style="font-size:28px;margin:12px 0">£138</h2>
-<p style="font-size:13px;line-height:1.6;color:#555">Sheer rose mesh top featuring delicate floral embroidery and black mother-of-pearl buttons. Designed with a relaxed fit and subtle puff sleeve. 100% polyester. Lined. Pair with high-waist trousers for an evening look.</p>
-<div style="margin:18px 0"><b>Size</b><div class="size-row"><button>[XS]</button><button>[S]</button><button class="active">[M]</button><button>[L]</button><button>[XL]</button></div><div style="text-align:center;font-size:12px;margin:8px 0">Qty: - 1 +</div></div>
-<button class="btn-black" onclick="addToCart()">ADD TO CART</button>
-<div style="margin-top:16px;font-size:11px"><p>✔ Free returns within 30 days</p><p>✔ Secure payment | Free UK delivery over £100</p><p style="margin-top:8px">Details | Shipping & Returns | Sustainability ▼</p></div>
-</div>
-</div>
+<div style="display:grid;max-width:1000px;margin:auto;grid-template-columns:1fr 1fr"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800" style="width:100%;height:600px;object-fit:cover"><div style="padding:24px;background:#fff"><p style="font-size:11px">Home / Product</p><h1 class="serif" style="font-size:26px;margin:12px 0">Floral Mesh Top — Rose</h1><h2 class="serif" style="font-size:24px">£138</h2><p style="font-size:12px;color:#666;margin:12px 0;line-height:1.6">Sheer rose mesh with floral embroidery. Relaxed fit.</p><button class="btn-black" onclick="alert('Added to cart!');showPage('shop')">ADD TO CART</button><p style="font-size:10px;margin-top:12px">✔ Free returns | ✔ Free delivery over £100</p></div></div>
 </div>
 
-<!-- AUTH PAGES - ALL 5 FLOWS TOGETHER - matches your second screenshot -->
+<!-- AUTH - NOW SEPARATE -->
 <div id="auth" class="page">
 <div class="auth-bg">
-<div class="auth-header"><h1>POP THE LOOK</h1><p style="font-size:10px;letter-spacing:2px;margin-top:6px">AUTH PAGES • LUXURY WOMEN CLOTHING — DESIGN SYSTEM</p></div>
-<div class="auth-grid">
 
-<!-- 01 SIGN IN -->
-<div class="auth-card">
+<!-- 01 SIGN IN - ONLY THIS SHOWS FIRST -->
+<div id="auth-signin" class="auth-sub active auth-card">
 <small>01 — SIGN IN</small>
-<h2>Welcome back</h2>
-<p class="sub">Sign in to your account</p>
-<label>Email</label><input id="loginEmail" type="email" value="you@email.com">
-<label>Password</label><input id="loginPass" type="password" value="123456">
+<h2>Welcome back</h2><p class="sub">Sign in to your account</p>
+<label>Email</label><input id="lEmail" type="email" placeholder="you@email.com">
+<label>Password</label><input id="lPass" type="password" placeholder="••••••••">
 <button class="btn-black" onclick="doLogin()">SIGN IN</button>
-<a class="link" onclick="alert('Enter email to reset - use FORGOT page on right')">Forgot your password?</a>
-<a class="link" onclick="document.getElementById('regEmail').focus()">Don't have an account?<br><b>Create account</b></a>
-<p id="loginMsg" style="font-size:11px;text-align:center;margin-top:8px;color:green"></p>
+<span class="link" onclick="showAuth('forgot')">Forgot your password?</span>
+<span class="link" onclick="showAuth('register')">Don't have an account? <b>Create account</b></span>
+<p id="lMsg" style="font-size:11px;text-align:center;color:green;margin-top:8px"></p>
 </div>
 
-<!-- 02 CREATE ACCOUNT -->
-<div class="auth-card">
+<!-- 02 REGISTER - ONLY WHEN CLICKED -->
+<div id="auth-register" class="auth-sub auth-card">
 <small>02 — CREATE ACCOUNT</small>
-<h2>Create your account</h2>
-<p class="sub">Join POP THE LOOK for exclusive access</p>
-<label>Email</label><input id="regEmail" type="email" placeholder="you@email.com">
-<label>Password</label><input id="regPass" type="password" placeholder="••••••••">
-<label>Confirm Password</label><input id="regConfirm" type="password" placeholder="••••••••">
+<h2>Create your account</h2><p class="sub">Join POP THE LOOK</p>
+<label>Email</label><input id="rEmail" type="email" placeholder="you@email.com">
+<label>Password</label><input type="password" id="rPass" placeholder="••••••••">
+<label>Confirm Password</label><input type="password" id="rConfirm" placeholder="••••••••">
 <button class="btn-black" onclick="doRegister()">CREATE ACCOUNT</button>
-<p style="font-size:9px;text-align:center;margin-top:10px">By creating an account you agree to our<br>Terms & Privacy</p>
-<p id="regMsg" style="font-size:11px;text-align:center;margin-top:8px;color:green"></p>
+<span class="link" onclick="showAuth('signin')">Already have account? <b>Sign in</b></span>
+<p id="rMsg" style="font-size:11px;text-align:center;color:green;margin-top:8px"></p>
 </div>
 
-<!-- 03 EMAIL CONFIRMATION -->
-<div class="auth-card" style="text-align:center">
+<!-- 03 CONFIRM - ONLY AFTER REGISTER -->
+<div id="auth-confirm" class="auth-sub auth-card" style="text-align:center">
 <small>03 — EMAIL CONFIRMATION SENT</small>
 <div class="icon-circle">✉</div>
-<h2>Check your email</h2>
-<p class="sub">We've sent a confirmation link to<br><b id="confEmailDisplay">you@email.com</b></p>
-<p style="font-size:11px;margin:12px 0">Click the link in the email to verify your account and get started.</p>
-<p style="font-size:11px">Didn't receive the email? <a href="#" onclick="doRegister()" style="color:#000">Resend in 00:32</a></p>
-<button class="btn-white" onclick="showPage('auth')">BACK TO SIGN IN</button>
+<h2>Check your email</h2><p class="sub">We've sent link to<br><b id="cEmail">you@email.com</b></p>
+<p style="font-size:11px;margin:10px 0">Click link to verify your account.</p>
+<button class="btn-white" onclick="showAuth('signin')">BACK TO SIGN IN</button>
+<button class="btn-black" onclick="showAuth('profile')">CONTINUE TO PROFILE →</button>
 </div>
 
-<!-- 04 PROFILE FORM -->
-<div class="auth-card">
+<!-- 04 PROFILE - ONLY AFTER CONFIRM -->
+<div id="auth-profile" class="auth-sub auth-card">
 <small>04 — PROFILE FORM</small>
-<h2>Complete your profile</h2>
-<p class="sub">Tell us more about you</p>
-<div class="two-col"><div><label>Name</label><input placeholder="First name"></div><div><label>Surname</label><input placeholder="Last name"></div></div>
+<h2>Complete your profile</h2><p class="sub">Tell us more about you</p>
+<div class="two-col"><div><label>Name</label><input id="pName" placeholder="First name"></div><div><label>Surname</label><input placeholder="Last name"></div></div>
 <label>Address</label><input placeholder="Street address">
 <div class="two-col"><div><label>City</label><input placeholder="City"></div><div><label>Postcode</label><input placeholder="Postcode"></div></div>
-<label>Country</label><select><option>United Kingdom</option><option>United States</option><option>Turkey</option></select>
-<button class="btn-black" onclick="alert('Profile saved!')">SAVE PROFILE</button>
+<label>Country</label><select><option>United Kingdom</option><option>USA</option><option>Turkey</option></select>
+<button class="btn-black" onclick="saveProfile()">SAVE PROFILE</button>
 </div>
 
-<!-- 05 FORGOT & RESET -->
-<div class="auth-card">
-<small>05 — FORGOT & RESET PASSWORD</small>
-<h2>Forgot password</h2>
-<p class="sub">Enter your email to reset</p>
-<label>Email</label><input id="forgotEmail" type="email" value="you@email.com">
+<!-- 05 FORGOT + RESET -->
+<div id="auth-forgot" class="auth-sub auth-card">
+<small>05 — FORGOT PASSWORD</small>
+<div id="forgot-step1">
+<h2>Forgot password</h2><p class="sub">Enter your email to reset</p>
+<label>Email</label><input id="fEmail" type="email" placeholder="you@email.com">
 <button class="btn-black" onclick="doForgot()">SEND RESET LINK</button>
-<div style="margin-top:26px"><h2>Reset password</h2><p class="sub">Choose a new password</p>
+<span class="link" onclick="showAuth('signin')">Back to Sign In</span>
+<p id="fMsg" style="font-size:11px;text-align:center;color:green;margin-top:8px"></p>
+</div>
+<div id="forgot-step2" style="display:none">
+<h2>Reset password</h2><p class="sub">Choose a new password</p>
 <label>New password</label><input type="password" placeholder="••••••••">
 <label>Confirm new password</label><input type="password" placeholder="••••••••">
-<button class="btn-black" onclick="alert('Password reset! Now Sign In')">RESET PASSWORD</button></div>
-<p id="forgotMsg" style="font-size:11px;text-align:center;margin-top:8px;color:green"></p>
+<button class="btn-black" onclick="alert('Password reset!');showAuth('signin')">RESET PASSWORD</button>
+</div>
 </div>
 
-</div>
-<div class="footer-links"><button onclick="showPage('home')">← Back to Home</button><button onclick="showPage('shop')">Go to Shop</button></div>
 </div>
 </div>
 
 <script>
-function showPage(id){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-window.scrollTo(0,0);
-}
-let cart=0;
-function addToCart(){cart++;document.getElementById('cartCount').innerText=cart;alert('Added to cart! Size M - £138');}
-function doLogin(){
-let e=document.getElementById('loginEmail').value, p=document.getElementById('loginPass').value;
-if(e && p){document.getElementById('loginMsg').innerText='✓ Signed in as '+e; localStorage.setItem('user',e); setTimeout(()=>showPage('shop'),800);}
-else document.getElementById('loginMsg').innerText='Enter email & password';
-}
-function doRegister(){
-let e=document.getElementById('regEmail').value||'you@email.com';
-if(e){document.getElementById('regMsg').innerText='✓ Account created! Check email'; document.getElementById('confEmailDisplay').innerText=e; localStorage.setItem('user',e);}
-}
-function doForgot(){
-let e=document.getElementById('forgotEmail').value;
-if(e){document.getElementById('forgotMsg').innerText='✓ Reset link sent to '+e;}
-}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='auth')showAuth('signin');window.scrollTo(0,0)}
+function showAuth(id){document.querySelectorAll('.auth-sub').forEach(a=>a.classList.remove('active'));document.getElementById('auth-'+id).classList.add('active');}
+function doLogin(){let e=document.getElementById('lEmail').value,p=document.getElementById('lPass').value;if(!e||!p){document.getElementById('lMsg').innerText='Enter email & password';return}document.getElementById('lMsg').innerText='✓ Signed in as '+e;localStorage.setItem('user',e);setTimeout(()=>showPage('shop'),800)}
+function doRegister(){let e=document.getElementById('rEmail').value||'test@email.com';if(!e){return}document.getElementById('cEmail').innerText=e;document.getElementById('rMsg').innerText='Account created!';setTimeout(()=>showAuth('confirm'),600)}
+function doForgot(){let e=document.getElementById('fEmail').value;if(!e){document.getElementById('fMsg').innerText='Enter email';return}document.getElementById('fMsg').innerText='✓ Reset link sent to '+e;setTimeout(()=>{document.getElementById('forgot-step1').style.display='none';document.getElementById('forgot-step2').style.display='block'},1000)}
+function saveProfile(){let n=document.getElementById('pName').value||'User';alert('Profile saved! Welcome '+n);showPage('shop')}
 </script>
 </body>
 </html>
