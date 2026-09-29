@@ -1,9 +1,39 @@
-nav {
-  font-family: 'Helvetica', sans-serif;
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 20px;
+  border-bottom:1px solid #eee;
+  background:#fff;
 }
-nav a:hover {
-  opacity: 0.7;
+.logo{
+  letter-spacing:4px;
+  font-weight:bold;
+  text-decoration:none;
+  color:#000;
+  font-family:serif;
+  font-size:16px;
 }
-@media (max-width: 768px){
-  nav { flex-direction: column; gap: 10px; }
+.navbar-center{
+  flex:1;
+  display:flex;
+  justify-content:center;
+}
+.navbar-right{
+  display:flex;
+  gap:18px;
+  font-size:11px;
+  letter-spacing:1px;
+  align-items:center;
+}
+.navbar-right a{
+  text-decoration:none;
+  color:#000;
+}
+.auth-link{cursor:pointer}
+.bag-link{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  cursor:pointer;
 }
