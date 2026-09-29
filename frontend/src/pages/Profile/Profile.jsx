@@ -1,17 +1,25 @@
+import { useNavigate } from 'react-router-dom'
+
 export default function Profile(){
- return <div style={{maxWidth:500, margin:'50px auto'}}>
-  <h1>Complete your profile</h1>
-  <form>
-   <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10}}>
-    <input placeholder="Name" required/><input placeholder="Surname" required/>
-   </div>
-   <input placeholder="Street Name" style={{width:'100%', marginTop:10}} required/>
-   <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginTop:10}}>
-    <input placeholder="City" required/><input placeholder="Postcode" required/>
-   </div>
-   <select style={{width:'100%', marginTop:10}}><option>United Kingdom</option><option>Turkey</option><option>USA</option></select>
-   <input placeholder="Country" style={{width:'100%', marginTop:10}}/>
-   <button style={{width:'100%', background:'black', color:'white', padding:14, marginTop:20}}>SAVE PROFILE</button>
-  </form>
- </div>
+  const user=localStorage.getItem('user')
+  const navigate=useNavigate()
+
+  if(!user){
+    navigate('/login')
+    return null
+  }
+
+  return(
+    <div style={{maxWidth:'600px',margin:'40px auto',padding:'20px'}}>
+      <h1 style={{fontFamily:'serif',letterSpacing:'4px'}}>MY PROFILE</h1>
+      <div style={{marginTop:'30px',background:'#f9f9f9',padding:'20px'}}>
+        <p style={{fontSize:'11px',letterSpacing:'1px',color:'#999'}}>EMAIL</p>
+        <p style={{marginTop:'8px'}}>{user}</p>
+        <button onClick={()=>{
+          localStorage.removeItem('user')
+          navigate('/login')
+        }} style={{background:'black',color:'white',padding:'12px 20px',border:'none',marginTop:'20px',letterSpacing:'1px',cursor:'pointer'}}>SIGN OUT</button>
+      </div>
+    </div>
+  )
 }
