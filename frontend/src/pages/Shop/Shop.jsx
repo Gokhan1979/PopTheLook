@@ -1,21 +1,49 @@
 import { useState, useEffect } from 'react'
-import ProductCard from '../../components/ProductCard/ProductCard.jsx'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import './Shop.css'
+
+const allProducts=[
+  {id:1,name:'Linen Blouse',price:89,cat:'Blouses',img:'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=600'},
+  {id:2,name:'Rose Mesh Top',price:138,cat:'Tops',img:'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600'},
+  {id:3,name:'Wrap Dress',price:145,cat:'Dresses',img:'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600'},
+  {id:4,name:'Silk Skirt',price:125,cat:'Skirts',img:'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600'},
+  {id:5,name:'Knit Cardigan',price:110,cat:'Knitwear',img:'https://images.unsplash.com/photo-1516762689617-e1cffcef479d?w=600'},
+  {id:6,name:'Wide Leg Trousers',price:135,cat:'Trousers',img:'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600'},
+]
 
 export default function Shop(){
-  const [products,setProducts] = useState([
-    {_id:'1', name:'Floral Mesh Button Top - Olive', price:138, image:'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=500', rating:4.8, reviews:32},
-    {_id:'2', name:'Floral Mesh Button Top - Rose', price:138, image:'https://images.unsplash.com/photo-1554412933-514a83d2f3c8?w=500', rating:4.7, reviews:56},
-    {_id:'3', name:'Linen Button Blouse Cream', price:89, image:'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500', rating:4.6, reviews:18},
-    {_id:'4', name:'Embroidered Puff Dress', price:128, image:'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500', rating:4.9, reviews:41},
-    {_id:'5', name:'Silk Wrap Dress Navy', price:145, image:'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500', rating:4.5, reviews:27},
-    {_id:'6', name:'Ruffled Cotton Shirt White', price:92, image:'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500', rating:4.7, reviews:22},
-  ]);
+  const [searchParams]=useSearchParams()
+  const searchQ=searchParams.get('search')||''
+  const [filter,setFilter]=useState(searchQ)
+  const navigate=useNavigate()
 
-  return <div style={{padding:20, maxWidth:1200, margin:'0 auto'}}>
-    <h1 style={{fontFamily:'serif'}}>Tops & Dresses</h1>
-    <p>24 Products • Filters | Sort: Recommended</p>
-    <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:20, marginTop:20}}>
-      {products.map(p=> <ProductCard key={p._id} product={p} />)}
+  useEffect(()=>{ setFilter(searchQ) },[searchQ])
+
+  const filtered=allProducts.filter(p=>
+    p.name.toLowerCase().includes(filter.toLowerCase()) ||
+    p.cat.toLowerCase().includes(filter.toLowerCase())
+  )
+
+  return(
+    <div style={{maxWidth:'1300px',margin:'0 auto',padding:'20px'}}>
+      <h1 style={{letterSpacing:'4px',fontFamily:'serif',textAlign:'center',margin:'20px 0'}}>
+        SHOP {filter && `- "${filter}"`}
+      </h1>
+      {filter && <p style={{textAlign:'center',fontSize:'11px',marginBottom:'20px'}}>{filtered.length} results found <span onClick={()=>navigate('/shop')} style={{textDecoration:'underline',cursor:'pointer',marginLeft:'10px'}}>Clear</span></p>}
+
+      <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'14px'}}>
+        {filtered.map(p=>(
+          <div key={p.id} onClick={()=>navigate(`/product/${p.id}`)} style={{cursor:'pointer',background:'#fff'}}>
+            <img src={p.img} style={{width:'100%',height:'420px',objectFit:'cover'}}/>
+            <div style={{padding:'10px'}}>
+              <p style={{fontSize:'10px',color:'#999',letterSpacing:'1px'}}>{p.cat}</p>
+              <p style={{fontSize:'13px',margin:'4px 0'}}>{p.name}</p>
+              <b style={{fontSize:'12px'}}>£{p.price}</b>
+            </div>
+          </div>
+        ))}
+      </div>
+      {filtered.length===0 && <p style={{textAlign:'center',marginTop:'40px'}}>No products found for "{filter}"</p>}
     </div>
-  </div>
+  )
 }
