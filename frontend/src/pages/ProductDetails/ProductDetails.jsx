@@ -1,32 +1,114 @@
-import { useParams } from 'react-router-dom'
 import { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import './ProductDetails.css'
+
+const productsData={
+  1:{
+    name:'Linen Blouse',
+    price:89,
+    images:[
+      'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800',
+      'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800&h=800&fit=crop&crop=top',
+      'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800'
+    ],
+    sizes:['XS','S','M','L','XL'],
+    colors:[
+      {name:'White',code:'#fff',img:'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800'},
+      {name:'Beige',code:'#e8d5b7',img:'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800'},
+      {name:'Black',code:'#000',img:'https://images.unsplash.com/photo-1516762689617-e1cffcef479d?w=800'}
+    ]
+  },
+  2:{
+    name:'Rose Mesh Top',
+    price:138,
+    images:[
+      'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800',
+      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800',
+      'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800'
+    ],
+    sizes:['S','M','L'],
+    colors:[
+      {name:'Rose',code:'#f4a6a6',img:'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800'},
+      {name:'White',code:'#fff',img:'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800'}
+    ]
+  }
+}
 
 export default function ProductDetails(){
-  const { id } = useParams();
-  const [size,setSize]=useState('M');
-  const product = {name:'Floral Mesh Button Top - Rose', price:138, image:'https://images.unsplash.com/photo-1554412933-514a83d2f3c8?w=500', desc:'Sheer rose mesh top featuring delicate floral embroidery and black mother-of-pearl buttons.'};
+  const {id}=useParams()
+  const navigate=useNavigate()
+  const product=productsData[id] || productsData[1]
 
-  const addToCart = () => {
-    const cart = JSON.parse(localStorage.getItem('cart')||'[]');
-    cart.push({...product, _id:id, qty:1, size});
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Added!');
+  const [selectedSize,setSelectedSize]=useState(null)
+  const [selectedColor,setSelectedColor]=useState(product.colors[0])
+  const [mainImage,setMainImage]=useState(product.colors[0].img)
+
+  const handleColorChange=(color)=>{
+    setSelectedColor(color)
+    setMainImage(color.img) // COLOR CHANGES PHOTO!
   }
 
-  return <div style={{maxWidth:1100, margin:'40px auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:40, padding:20}}>
-    <img src={product.image} style={{width:'100%', height:600, objectFit:'cover'}}/>
-    <div>
-      <p>Home / Shop / Product Details</p>
-      <h1 style={{fontFamily:'serif'}}>{product.name}</h1>
-      <p>⭐⭐⭐⭐⭐ 4.7 (56 reviews)</p>
-      <h2>£{product.price}</h2>
-      <p>{product.desc}</p>
-      <p style={{marginTop:20}}><strong>Size</strong></p>
-      <div style={{display:'flex', gap:10}}>
-        {['XS','S','M','L','XL'].map(s=> <button key={s} onClick={()=>setSize(s)} style={{padding:'10px 15px', border:'1px solid black', background: size===s? 'black':'white', color: size===s? 'white':'black'}}>{s}</button>)}
+  const addToBag=()=>{
+    if(!selectedSize){
+      alert('Please select size!')
+      return
+    }
+    const cart=JSON.parse(localStorage.getItem('ptl_cart')||'[]')
+    cart.push({id:Date.now(),name:product.name,price:product.price,img:mainImage,size:selectedSize,color:selectedColor.name})
+    localStorage.setItem('ptl_cart',JSON.stringify(cart))
+    navigate('/cart')
+  }
+
+  return(
+    <div className="product-details">
+      {/* LEFT - PHOTOS */}
+      <div className="photos-section">
+        <div className="main-photo-wrapper">
+          <img src={mainImage} className="main-photo" alt="product"/>
+        </div>
+        {/* THUMBNAILS UNDERNEATH - NOT LEFT! */}
+        <div className="thumbnails-underneath">
+          {product.images.map((img,i)=>(
+            <img key={i} src={img} onClick={()=>setMainImage(img)} className={mainImage===img? 'thumb active' : 'thumb'} alt="thumb"/>
+          ))}
+        </div>
       </div>
-      <button onClick={addToCart} style={{width:'100%', background:'black', color:'white', padding:16, marginTop:20, border:'none'}}>ADD TO CART</button>
-      <p style={{marginTop:15, fontSize:13}}>✓ Free returns within 30 days<br/>✓ Secure payment | Free UK delivery over £100</p>
+
+      {/* RIGHT - DETAILS */}
+      <div className="details-section">
+        <h1 className="prod-name">{product.name}</h1>
+        <p className="prod-price">£{product.price}</p>
+
+        {/* COLORS - CHANGES PHOTO */}
+        <div className="option-block">
+          <p className="option-label">COLOR: {selectedColor.name}</p>
+          <div className="colors-row">
+            {product.colors.map((c,i)=>(
+              <div key={i} onClick={()=>handleColorChange(c)} className={selectedColor.name===c.name? 'color-dot active' : 'color-dot'} style={{background:c.code, border: c.code==='#fff'? '1px solid #ddd' : '1px solid transparent'}} title={c.name}></div>
+            ))}
+          </div>
+        </div>
+
+        {/* SIZES - BLACK WHEN CLICKED */}
+        <div className="option-block">
+          <p className="option-label">SIZE</p>
+          <div className="sizes-row">
+            {product.sizes.map((s)=>(
+              <div key={s} onClick={()=>setSelectedSize(s)} className={selectedSize===s? 'size-box selected' : 'size-box'}>
+                {s}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <button onClick={addToBag} className="add-bag-btn">ADD TO BAG 👜</button>
+
+        <div className="info-accordions">
+          <p>✓ Free shipping over £100</p>
+          <p>✓ Free returns within 30 days</p>
+          <p>✓ Sustainable fabric</p>
+        </div>
+      </div>
     </div>
-  </div>
+  )
 }
