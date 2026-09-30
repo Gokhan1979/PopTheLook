@@ -1,36 +1,43 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './SearchBar.css'
+import { useState } from 'react';
+import { useSearch } from '../../hooks/useSearch';
+import './SearchBar.css';
 
-export default function SearchBar(){
-  const [query,setQuery]=useState('')
-  const [isFocused,setIsFocused]=useState(false)
-  const navigate=useNavigate()
+const SearchBar = ({ products, onSelectProduct }) => {
+  const { display } = useSearch();
+  const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
 
-  const handleSearch=(e)=>{
-    e.preventDefault()
-    if(query.trim()){
-      navigate(`/shop?search=${query}`)
-      setQuery('')
-    }
-  }
+  const filtered = products.filter(p => 
+    p.name.toLowerCase().includes(query.toLowerCase())
+  );
 
-  return(
-    <form onSubmit={handleSearch} className={`search-bar ${isFocused? 'focused' : ''}`}>
-      <input
-        type="text"
-        value={query}
-        onChange={(e)=>setQuery(e.target.value)}
-        onFocus={()=>setIsFocused(true)}
-        onBlur={()=>setIsFocused(false)}
-        placeholder="Search..."
-        className="search-input"
-      />
-      <button type="submit" className="search-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-      </button>
-    </form>
-  )
-}
+  return (
+    <div className="search-wrap">
+      <div className="search-pill">
+        <input 
+          type="text"
+          value={query}
+          onChange={(e)=> {setQuery(e.target.value); setOpen(true)}}
+          onFocus={()=> setOpen(true)}
+          placeholder=""
+        />
+        {/* Your working animated typing */}
+        {!query && <span className="typed">{display}<span className="cursor">|</span></span>}
+        
+        <button className="search-icon">⌕</button>
+      </div>
+
+      {open && query && (
+        <div className="search-results">
+          {filtered.map(p => (
+            <div key={p.id} onClick={()=> {onSelectProduct(p); setOpen(false)}}>
+              {p.name}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SearchBar;
