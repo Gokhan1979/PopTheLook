@@ -3,48 +3,34 @@ import { useNavigate } from 'react-router-dom'
 import './SearchBar.css'
 
 export default function SearchBar(){
-  const [open,setOpen]=useState(false)
-  const [q,setQ]=useState('')
+  const [query,setQuery]=useState('')
+  const [isFocused,setIsFocused]=useState(false)
   const navigate=useNavigate()
 
-  const doSearch=()=>{
-    if(q.trim()){
-      navigate(`/shop?search=${q}`)
-      setOpen(false)
-      setQ('')
+  const handleSearch=(e)=>{
+    e.preventDefault()
+    if(query.trim()){
+      navigate(`/shop?search=${query}`)
+      setQuery('')
     }
   }
 
   return(
-    <div className="search-middle">
-      {/* Icon - click to open */}
-      {!open ? (
-        <div className="search-icon-closed" onClick={()=>setOpen(true)}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <span>SEARCH</span>
-        </div>
-      ) : (
-        <div className="search-box-open">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input
-            autoFocus
-            value={q}
-            onChange={e=>setQ(e.target.value)}
-            onKeyDown={e=>{
-              if(e.key==='Enter') doSearch()
-              if(e.key==='Escape') setOpen(false)
-            }}
-            placeholder="Search for products..."
-          />
-          <span className="close-x" onClick={()=>setOpen(false)}>✕</span>
-        </div>
-      )}
-    </div>
+    <form onSubmit={handleSearch} className={`search-bar ${isFocused? 'focused' : ''}`}>
+      <input
+        type="text"
+        value={query}
+        onChange={(e)=>setQuery(e.target.value)}
+        onFocus={()=>setIsFocused(true)}
+        onBlur={()=>setIsFocused(false)}
+        placeholder="Search..."
+        className="search-input"
+      />
+      <button type="submit" className="search-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+    </form>
   )
 }
