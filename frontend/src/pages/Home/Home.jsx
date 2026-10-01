@@ -1,38 +1,58 @@
-import { useState, useEffect } from 'react';
-import ProductCard from '../../Components/ProductCard/ProductCard';
-import './Home.css'; // we will create next
+import React from 'react';
 
 const Home = () => {
-  const [products] = useState([
-    {id:1,name:'Linen Blouse - White',price:89,cat:'Blouses',img:'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800'},
-    {id:2,name:'Rose Mesh Top',price:138,cat:'Tops',img:'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800'},
-    {id:3,name:'Wrap Dress - Floral',price:145,cat:'Dresses',img:'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800'},
-  ]);
-
-  const user = localStorage.getItem('user');
-
   return (
-    <div>
-      <div className="hero">
-        <div style={{maxWidth:'340px'}}>
-          <p style={{fontSize:'10px',letterSpacing:'3px'}}>NEW IN</p>
-          <h1 className="serif" style={{fontSize:'42px',lineHeight:1,margin:'10px 0'}}>SUMMER BLOOMS</h1>
-          <button className="btn-black" onClick={()=> window.location.href='/shop'}>SHOP NOW →</button>
+    <div style={{background:'#fff'}}>
+      {/* HEADER - From your demo */}
+      <header style={{display:'flex', justifyContent:'space-between', padding:'20px 40px', borderBottom:'1px solid #eee', alignItems:'center'}}>
+        <h1 className="serif" style={{fontSize:'28px', letterSpacing:'4px', fontWeight:'500'}}>VETRA</h1>
+        <nav style={{display:'flex', gap:'20px', fontSize:'11px', letterSpacing:'1px'}}>
+          <a href="#">SHOP</a>
+          <a href="#">NEW</a>
+          <a href="#">ABOUT</a>
+        </nav>
+        <div style={{fontSize:'11px'}}>CART (0)</div>
+      </header>
+
+      {/* HERO - Your pink hero from demo */}
+      <section style={{background:'#ffeef0', textAlign:'center', padding:'80px 20px'}}>
+        <h2 className="serif" style={{fontSize:'64px', fontWeight:'400', lineHeight:'1'}}>New Collection</h2>
+        <p style={{marginTop:'15px', fontSize:'13px', letterSpacing:'2px', color:'#666'}}>EFFORTLESS • FEMININE • MODERN</p>
+        <button className="btn-black" style={{marginTop:'30px'}}>SHOP NOW</button>
+      </section>
+
+      {/* PRODUCTS GRID - Your 3 column grid */}
+      <section>
+        <h3 className="serif" style={{textAlign:'center', fontSize:'32px', margin:'50px 0 20px'}}>Best Sellers</h3>
+        <div className="grid">
+          <div style={{border:'1px solid #eee'}}>
+            <div style={{background:'#f9f9f9', height:'350px', display:'flex', alignItems:'center', justifyContent:'center'}}>Image 1</div>
+            <div style={{padding:'15px'}}>
+              <p style={{fontSize:'12px', letterSpacing:'1px'}}>SATIN DRESS</p>
+              <p style={{fontSize:'12px', color:'#666', marginTop:'5px'}}>$120.00</p>
+            </div>
+          </div>
+          <div style={{border:'1px solid #eee'}}>
+            <div style={{background:'#f9f9f9', height:'350px', display:'flex', alignItems:'center', justifyContent:'center'}}>Image 2</div>
+            <div style={{padding:'15px'}}>
+              <p style={{fontSize:'12px', letterSpacing:'1px'}}>SILK TOP</p>
+              <p style={{fontSize:'12px', color:'#666', marginTop:'5px'}}>$85.00</p>
+            </div>
+          </div>
+          <div style={{border:'1px solid #eee'}}>
+            <div style={{background:'#f9f9f9', height:'350px', display:'flex', alignItems:'center', justifyContent:'center'}}>Image 3</div>
+            <div style={{padding:'15px'}}>
+              <p style={{fontSize:'12px', letterSpacing:'1px'}}>LINEN PANTS</p>
+              <p style={{fontSize:'12px', color:'#666', marginTop:'5px'}}>$95.00</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div style={{textAlign:'center',padding:'30px 0 10px'}}>
-        <h2 className="serif" style={{fontSize:'28px'}}>Best Sellers</h2>
-        <p style={{fontSize:'11px',color:'#666'}}>
-          {user? `Welcome, ${user}` : 'SHOP OUR FAVORITES'}
-        </p>
-      </div>
-
-      <div className="grid">
-        {products.map(p => (
-          <ProductCard key={p.id} product={p} />
-        ))}
-      </div>
+      {/* FOOTER */}
+      <footer style={{background:'#0e0e0e', color:'#fff', textAlign:'center', padding:'40px', marginTop:'60px', fontSize:'11px', letterSpacing:'2px'}}>
+        VETRA © 2026
+      </footer>
     </div>
   );
 };
