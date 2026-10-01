@@ -1,5 +1,5 @@
-// Central assets export
-export { default as Logo } from './logos/logo.svg';
+// This file will export all images when you add them later
+// For now, leave empty - no error!
 
-// Later add:
-// export { default as HeroImg } from './images/hero-summer.jpg';
+export const images = {};
+export const logos = {};
