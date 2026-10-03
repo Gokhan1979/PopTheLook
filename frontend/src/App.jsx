@@ -13,6 +13,8 @@ import Wishlist from './pages/Wishlist/Wishlist'
 import Contact from './pages/Contact/Contact'
 import About from './pages/About/About'
 import Orders from './pages/Orders/Orders'
+import Forgot from './pages/Login/Forgot'
+import Reset from './pages/Login/Reset'
 import { CartProvider } from './context/CartContext'
 
 function App(){
@@ -27,7 +29,13 @@ function App(){
             <Route path="/product/:id" element={<ProductDetails/>} />
             <Route path="/cart" element={<Cart/>} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/signin" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
+            <Route path="/signup" element={<Register/>} />
+            <Route path="/forgot-password" element={<Forgot/>} />
+            <Route path="/forgot" element={<Forgot/>} />
+            <Route path="/reset-password/:token" element={<Reset/>} />
+            <Route path="/reset/:token" element={<Reset/>} />
             <Route path="/checkout" element={<Checkout/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/wishlist" element={<Wishlist/>} />
