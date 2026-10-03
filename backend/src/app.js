@@ -1,20 +1,22 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import SignIn from './pages/SignIn';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
+import express from 'express';
+import cors from 'cors';
+import authRoutes from './routes/auth.js';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Navbar /> {/* Only navbar - NO SearchBar here */}
-      <Routes>
-        <Route path="/" element={<Home />} /> {/* SearchBar + rug image ONLY inside Home.jsx */}
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
+const app = express();
+
+// Middlewares
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true
+}));
+app.use(express.json());
+
+// Test route
+app.get('/', (req, res) => {
+  res.json({ message: 'POP THE LOOK API is running! 👗' });
+});
+
+// Auth routes - THIS WAS MISSING!
+app.use('/api/auth', authRoutes);
+
+export default app;
